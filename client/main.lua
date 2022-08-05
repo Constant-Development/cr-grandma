@@ -35,8 +35,7 @@ local function ConstantDevelopmentGrandma(notifType, message, title)
 		end
 	elseif Config.Framework.Notifications == 'chat' then
 		TriggerEvent('chatMessage', message)
-	elseif Config.Notify == 'other' then
-		--You can add any notification system here.
+	elseif Config.Notify == 'other' then -- Add your Custom Notification below.
 	end
 end
 
