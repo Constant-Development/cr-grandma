@@ -148,38 +148,30 @@ end)
 
 RegisterNetEvent("cr-grandma:client:MedicalAid", function()
     if QBCore.Functions.GetPlayerData().metadata.isdead or QBCore.Functions.GetPlayerData().metadata.inlaststand then
-        if QBCore.Functions.GetPlayerData().money['cash'] or QBCore.Functions.GetPlayerData().money['bank'] or QBCore.Functions.GetPlayerData().money['crypto'] >= Config.IllegalMedical.PaymentCost then
-            QBCore.Functions.Progressbar('ConstantDevelopmentIllegalGrandmaMedical', Config.IllegalMedical.PedName..'is helping you..', math.random(2500, 10000), false, false, {
-                disableMovement = true,
-                disableCarMovement = true,
-                disableMouse = false,
-                disableCombat = true,
-            }, {}, {}, {}, function()
-                TriggerServerEvent("cr-grandma:server:MedicalAid")
-            end, function()
-                ConstantDevelopmentGrandma(3, "You wouldn\'t sit still so I stopped helping you...", Config.IllegalMedical.OkOkNotificationTitle)
-            end)
-        else
-            ConstantDevelopmentGrandma(3, Config.IllegalMedical.PedName.."won't help, if you don't have some the Money...", Config.IllegalMedical.OkOkNotificationTitle)
-        end
+        QBCore.Functions.Progressbar('ConstantDevelopmentIllegalGrandmaMedical', Config.IllegalMedical.PedName..'is helping you..', math.random(2500, 10000), false, true, {
+            disableMovement = true,
+            disableCarMovement = true,
+            disableMouse = false,
+            disableCombat = true,
+        }, {}, {}, {}, function()
+            TriggerServerEvent("cr-grandma:server:MedicalAid")
+        end, function()
+            ConstantDevelopmentGrandma(3, "You wouldn\'t sit still so I stopped helping you...", Config.IllegalMedical.OkOkNotificationTitle)
+        end)
     else
         ConstantDevelopmentGrandma(3, "It seems like you don\'t need any help?", Config.IllegalMedical.OkOkNotificationTitle)
     end
 end)
 
 RegisterNetEvent("cr-grandma:client:MedicalAidInjuries", function()
-    if QBCore.Functions.GetPlayerData().money['cash'] or QBCore.Functions.GetPlayerData().money['bank'] or QBCore.Functions.GetPlayerData().money['crypto'] >= Config.MedicalAidInjuries.PaymentCost then
-        QBCore.Functions.Progressbar('ConstantDevelopmentIllegalGrandmaMedical', Config.IllegalMedical.PedName..'is helping you..', math.random(2500, 10000), false, false, {
-            disableMovement = true,
-            disableCarMovement = true,
-            disableMouse = false,
-            disableCombat = true,
-        }, {}, {}, {}, function()
-            TriggerServerEvent("cr-grandma:server:MedicalAidInjuries")
-        end, function()
-            ConstantDevelopmentGrandma(3, "You wouldn\'t sit still so I stopped helping you...", Config.IllegalMedical.OkOkNotificationTitle)
-        end)
-    else
-        ConstantDevelopmentGrandma(3, Config.IllegalMedical.PedName.."won't help, if you don't have some the Money...", Config.IllegalMedical.OkOkNotificationTitle)
-    end
+    QBCore.Functions.Progressbar('ConstantDevelopmentIllegalGrandmaMedical', Config.IllegalMedical.PedName..'is helping you..', math.random(2500, 10000), false, true, {
+        disableMovement = true,
+        disableCarMovement = true,
+        disableMouse = false,
+        disableCombat = true,
+    }, {}, {}, {}, function()
+        TriggerServerEvent("cr-grandma:server:MedicalAidInjuries")
+    end, function()
+        ConstantDevelopmentGrandma(3, "You wouldn\'t sit still so I stopped helping you...", Config.IllegalMedical.OkOkNotificationTitle)
+    end)
 end)
