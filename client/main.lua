@@ -67,41 +67,58 @@ local function CreatePedAtCoords(pedModel, coords)
 end
 
 Citizen.CreateThread(function()
-	CreatePedAtCoords(Config.IllegalMedical.PedModel, Config.IllegalMedical.Coords)
+    CreatePedAtCoords(Config.IllegalMedical.PedModel, Config.IllegalMedical.Coords)
     if Config.Framework.Debug == true then
         print('Constant Development Grandma | PED Activated')
     end
-end)
-
-Citizen.CreateThread(function()
     if Config.Framework.Target == 'qb-target' then
-        exports['qb-target']:AddTargetEntity(Config.IllegalMedical.PedModel, {
+        exports['qb-target']:AddBoxZone("ConstantDevelopmentIllegalMedical", Config.IllegalMedicalTarget.Coords, Config.IllegalMedicalTarget.Width, Config.IllegalMedicalTarget.Length, {
+            name = "ConstantDevelopmentIllegalMedical",
+            heading = Config.IllegalMedicalTarget.Heading,
+            debugPoly = Config.IllegalMedicalTarget.DebugPoly,
+            minZ = Config.IllegalMedicalTarget.minZ,
+            maxZ = Config.IllegalMedicalTarget.maxZ,
+        }, {
             options = {
                 {
                     type = "client",
                     event = "cr-grandma:client:MedicalAid",
-                    icon = Config.IllegalMedical.TargetIcon,
-                    label = "Speak with "..Config.IllegalMedical.PedName,
-                    ped = Config.IllegalMedical.PedModel
-                },
-            },
-            distance = 3.0
+				    icon = Config.IllegalMedicalTarget.TargetIcon,
+				    label = Config.IllegalMedicalTarget.TargetLabel,
+                    canInteract = function()
+                        if not Config.IllegalMedicalTarget.CanInteractLimit then return true else
+                          if QBCore.Functions.GetPlayerData().metadata.isdead or QBCore.Functions.GetPlayerData().metadata.inlaststand then return true else return false end
+                        end
+                    end,
+			    },
+		    },
+		    distance = Config.IllegalMedicalTarget.TargetDistance
         })
         if Config.Framework.Debug == true then
             print('Constant Development Grandma | Target Activated')
         end
     elseif Config.Framework.Target == 'qtarget' then
-        exports['qtarget']:AddTargetEntity(Config.IllegalMedical.PedModel, {
+        exports['qtarget']:AddBoxZone("ConstantDevelopmentIllegalMedical", Config.IllegalMedicalTarget.Coords, Config.IllegalMedicalTarget.Width, Config.IllegalMedicalTarget.Length, {
+            name = "ConstantDevelopmentIllegalMedical",
+            heading = Config.IllegalMedicalTarget.Heading,
+            debugPoly = Config.IllegalMedicalTarget.DebugPoly,
+            minZ = Config.IllegalMedicalTarget.minZ,
+            maxZ = Config.IllegalMedicalTarget.maxZ,
+        }, {
             options = {
                 {
                     type = "client",
                     event = "cr-grandma:client:MedicalAid",
-                    icon = Config.IllegalMedical.TargetIcon,
-                    label = "Speak with "..Config.IllegalMedical.PedName,
-                    ped = Config.IllegalMedical.PedModel
-                },
-            },
-            distance = 3.0
+				    icon = Config.IllegalMedicalTarget.TargetIcon,
+				    label = Config.IllegalMedicalTarget.TargetLabel,
+                    canInteract = function()
+                        if not Config.IllegalMedicalTarget.CanInteractLimit then return true else
+                          if QBCore.Functions.GetPlayerData().metadata.isdead or QBCore.Functions.GetPlayerData().metadata.inlaststand then return true else return false end
+                        end
+                    end,
+			    },
+		    },
+		    distance = Config.IllegalMedicalTarget.TargetDistance
         })
         if Config.Framework.Debug == true then
             print('Constant Development Grandma | Target Activated')
