@@ -12,7 +12,6 @@ Config.Framework = {
     -- 'mythic' = mythic_notify
     -- 'tnj' = tnj-notify
     -- 'chat' = Chat Message
-    -- 'other' = Add Custom Notification
 
     Logs = false, -- Currrently setup via QBCore Logs
     -- True = Logs Enabled

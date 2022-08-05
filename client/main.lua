@@ -34,8 +34,13 @@ local function ConstantDevelopmentGrandma(notifType, message, title)
             exports['tnj-notify']:Notify(message, 'error', 3000)
 		end
 	elseif Config.Framework.Notifications == 'chat' then
-		TriggerEvent('chatMessage', message)
-	elseif Config.Notify == 'other' then -- Add your Custom Notification below.
+        if notifType == 1 then
+            TriggerEvent('chatMessage', message)
+		elseif notifType == 2 then
+            TriggerEvent('chatMessage', message)
+		elseif notifType == 3 then
+            TriggerEvent('chatMessage', message)
+		end
 	end
 end
 
