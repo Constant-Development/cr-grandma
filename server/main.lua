@@ -5,7 +5,7 @@ RegisterNetEvent('cr-grandma:server:MedicalAid', function(source)
     Player.Functions.RemoveMoney(Config.IllegalMedical.PaymentType, Config.IllegalMedical.PaymentCost)
     TriggerClientEvent("cr-grandma:client:MedicalAidNotification", 1, "Wow, looks like you are certified to be helped!")
     TriggerClientEvent("hospital:client:Revive", source)
-    if Config.IllegalMedical.HealInjuries then
+    if Config.IllegalMedical.HealPlayerInjuries then
         TriggerClientEvent("hospital:client:HealInjuries", source, "full")
     end
     Wait(2500)
