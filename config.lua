@@ -31,5 +31,6 @@ Config.IllegalMedical = {
     TargetIcon = "fas fa-user-injured",
     PaymentType = 'cash', -- 'cash' = QBCore Player Cash Money | 'bank' = QBCore Player Bank Money | 'crypto' = QBCore Player Crypto Money
     PaymentCost = 0, -- Amount of Money
+    HealPlayerInjuries = false,
     OkOkNotificationTitle = "Grandma Aid"
 }
