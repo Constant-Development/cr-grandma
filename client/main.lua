@@ -91,6 +91,12 @@ Citizen.CreateThread(function()
                         end
                     end,
 			    },
+                {
+                    type = "client",
+                    event = "cr-grandma:client:MedicalAidInjuries",
+				    icon = Config.IllegalMedicalTarget.InjuryTargetIcon,
+				    label = Config.IllegalMedicalTarget.InjuryTargetLabel,
+			    },
 		    },
 		    distance = Config.IllegalMedicalTarget.TargetDistance
         })
@@ -117,6 +123,12 @@ Citizen.CreateThread(function()
                         end
                     end,
 			    },
+                {
+                    type = "client",
+                    event = "cr-grandma:client:MedicalAidInjuries",
+				    icon = Config.IllegalMedicalTarget.InjuryTargetIcon,
+				    label = Config.IllegalMedicalTarget.InjuryTargetLabel,
+			    },
 		    },
 		    distance = Config.IllegalMedicalTarget.TargetDistance
         })
@@ -124,6 +136,10 @@ Citizen.CreateThread(function()
             print('Constant Development Grandma | Target Activated')
         end
     end
+end)
+
+RegisterNetEvent("cr-grandma:client:MedicalAidNotification", function(NotificationType, NotificationMessage)
+    ConstantDevelopmentGrandma(NotificationType, NotificationMessage, Config.IllegalMedical.OkOkNotificationTitle)
 end)
 
 RegisterNetEvent("cr-grandma:client:MedicalAid", function()
@@ -147,6 +163,19 @@ RegisterNetEvent("cr-grandma:client:MedicalAid", function()
     end
 end)
 
-RegisterNetEvent("cr-grandma:client:MedicalAidNotification", function(NotificationType, NotificationMessage)
-    ConstantDevelopmentGrandma(NotificationType, NotificationMessage, Config.IllegalMedical.OkOkNotificationTitle)
+RegisterNetEvent("cr-grandma:client:MedicalAidInjuries", function()
+    if QBCore.Functions.GetPlayerData().money['cash'] or QBCore.Functions.GetPlayerData().money['bank'] or QBCore.Functions.GetPlayerData().money['crypto'] >= Config.MedicalAidInjuries.PaymentCost then
+        QBCore.Functions.Progressbar('ConstantDevelopmentIllegalGrandmaMedical', Config.IllegalMedical.PedName..'is helping you..', math.random(2500, 10000), false, false, {
+            disableMovement = true,
+            disableCarMovement = true,
+            disableMouse = false,
+            disableCombat = true,
+        }, {}, {}, {}, function()
+            TriggerServerEvent("cr-grandma:server:MedicalAidInjuries")
+        end, function()
+            ConstantDevelopmentGrandma(3, "You wouldn\'t sit still so I stopped helping you...", Config.IllegalMedical.OkOkNotificationTitle)
+        end)
+    else
+        ConstantDevelopmentGrandma(3, Config.IllegalMedical.PedName.."won't help, if you don't have some the Money...", Config.IllegalMedical.OkOkNotificationTitle)
+    end
 end)
