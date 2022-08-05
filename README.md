@@ -2,8 +2,6 @@
 
 ## Simple Grandma Medical System for FiveM
 
-### Developed By: SixGrams#0544
-
 [Constant Development Discord](https://discord.gg/gSQbshCNv4)
 [Constant Development Tebex](https://constant-development.tebex.io/)
 [Constant RolePlay Discord](https://discord.gg/constantroleplay)
