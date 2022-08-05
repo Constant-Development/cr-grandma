@@ -69,7 +69,9 @@ local function CreatePedAtCoords(pedModel, coords)
 end
 
 Citizen.CreateThread(function()
-    CreatePedAtCoords(Config.IllegalMedical.PedModel, Config.IllegalMedical.Coords)
+    local PedModel = Config.IllegalMedical.PedModel
+    local Coords = Config.IllegalMedical.Coords
+    CreatePedAtCoords(PedModel, Coords)
     if Config.Framework.Debug == true then
         print('Constant Development Grandma | PED Activated')
     end
@@ -85,22 +87,22 @@ Citizen.CreateThread(function()
                 {
                     type = "client",
                     event = "cr-grandma:client:MedicalAid",
-				    icon = Config.IllegalMedicalTarget.TargetIcon,
-				    label = Config.IllegalMedicalTarget.TargetLabel,
+                    icon = Config.IllegalMedicalTarget.TargetIcon,
+                    label = Config.IllegalMedicalTarget.TargetLabel,
                     canInteract = function()
                         if not Config.IllegalMedicalTarget.CanInteractLimit then return true else
-                          if QBCore.Functions.GetPlayerData().metadata.isdead or QBCore.Functions.GetPlayerData().metadata.inlaststand then return true else return false end
+                            if QBCore.Functions.GetPlayerData().metadata.isdead or QBCore.Functions.GetPlayerData().metadata.inlaststand then return true else return false end
                         end
                     end,
-			    },
+                },
                 {
                     type = "client",
                     event = "cr-grandma:client:MedicalAidInjuries",
-				    icon = Config.IllegalMedicalTarget.InjuryTargetIcon,
-				    label = Config.IllegalMedicalTarget.InjuryTargetLabel,
-			    },
-		    },
-		    distance = Config.IllegalMedicalTarget.TargetDistance
+                    icon = Config.IllegalMedicalTarget.InjuryTargetIcon,
+                    label = Config.IllegalMedicalTarget.InjuryTargetLabel,
+                },
+            },
+            distance = Config.IllegalMedicalTarget.TargetDistance
         })
         if Config.Framework.Debug == true then
             print('Constant Development Grandma | Target Activated')
@@ -117,22 +119,22 @@ Citizen.CreateThread(function()
                 {
                     type = "client",
                     event = "cr-grandma:client:MedicalAid",
-				    icon = Config.IllegalMedicalTarget.TargetIcon,
-				    label = Config.IllegalMedicalTarget.TargetLabel,
+                    icon = Config.IllegalMedicalTarget.TargetIcon,
+                    label = Config.IllegalMedicalTarget.TargetLabel,
                     canInteract = function()
                         if not Config.IllegalMedicalTarget.CanInteractLimit then return true else
-                          if QBCore.Functions.GetPlayerData().metadata.isdead or QBCore.Functions.GetPlayerData().metadata.inlaststand then return true else return false end
+                            if QBCore.Functions.GetPlayerData().metadata.isdead or QBCore.Functions.GetPlayerData().metadata.inlaststand then return true else return false end
                         end
                     end,
-			    },
+                },
                 {
                     type = "client",
                     event = "cr-grandma:client:MedicalAidInjuries",
-				    icon = Config.IllegalMedicalTarget.InjuryTargetIcon,
-				    label = Config.IllegalMedicalTarget.InjuryTargetLabel,
-			    },
-		    },
-		    distance = Config.IllegalMedicalTarget.TargetDistance
+                    icon = Config.IllegalMedicalTarget.InjuryTargetIcon,
+                    label = Config.IllegalMedicalTarget.InjuryTargetLabel,
+                },
+            },
+            distance = Config.IllegalMedicalTarget.TargetDistance
         })
         if Config.Framework.Debug == true then
             print('Constant Development Grandma | Target Activated')
