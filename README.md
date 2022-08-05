@@ -1,6 +1,6 @@
 # cr-grandma
 
-## Simple Grandma Medical System for FiveM
+## Simple NPC Medical System for FiveM
 
 [Constant Development Discord](https://discord.gg/gSQbshCNv4)
 [Constant Development Tebex](https://constant-development.tebex.io/)
