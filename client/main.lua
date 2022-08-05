@@ -142,10 +142,6 @@ Citizen.CreateThread(function()
     end
 end)
 
-RegisterNetEvent("cr-grandma:client:MedicalAidNotification", function(NotificationType, NotificationMessage)
-    ConstantDevelopmentGrandma(NotificationType, NotificationMessage, Config.IllegalMedical.OkOkNotificationTitle)
-end)
-
 RegisterNetEvent("cr-grandma:client:MedicalAid", function()
     if QBCore.Functions.GetPlayerData().metadata.isdead or QBCore.Functions.GetPlayerData().metadata.inlaststand then
         QBCore.Functions.Progressbar('ConstantDevelopmentIllegalGrandmaMedical', Config.IllegalMedical.PedName..'is helping you..', math.random(2500, 10000), false, true, {
