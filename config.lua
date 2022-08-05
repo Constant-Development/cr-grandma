@@ -31,6 +31,6 @@ Config.IllegalMedical = {
     TargetIcon = "fas fa-user-injured",
     PaymentType = 'cash', -- 'cash' = QBCore Player Cash Money | 'bank' = QBCore Player Bank Money | 'crypto' = QBCore Player Crypto Money
     PaymentCost = 0, -- Amount of Money
-    HealPlayerInjuries = false, -- Heal Physical Player Injuries | Example: Player fell off Building and broke his Leg. This being set to True will heal that Injury.
+    HealPlayerInjuries = false, -- Heal Physical Player Injuries | Example: Player fell off Building and broke his Leg. This being set to 'true' will heal that Injury.
     OkOkNotificationTitle = "Grandma Aid"
 }
