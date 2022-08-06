@@ -66,7 +66,7 @@ end)
 RegisterNetEvent('cr-grandma:server:MedicalAidInjuries', function(source)
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
-    if Config.IllegalMedicalTarget.InjuryTarget == true then
+    if Config.IllegalMedicalTarget.InjuryTarget then
         if Config.MedicalAidInjuries.PaymentType == 'cash' or 'bank' or 'crypto' then
             if Player.Functions.GetMoney(Config.MedicalAidInjuries.PaymentType) >= Config.MedicalAidInjuries.PaymentCost then
                 Player.Functions.RemoveMoney(Config.MedicalAidInjuries.PaymentType, Config.MedicalAidInjuries.PaymentCost)

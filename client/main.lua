@@ -62,7 +62,7 @@ local function CreatePedAtCoords(pedModel, coords)
     SetEntityInvincible(ped, true)
     PlaceObjectOnGroundProperly(ped)
     SetBlockingOfNonTemporaryEvents(ped, true)
-    if Config.Framework.Debug == true then
+    if Config.Framework.Debug then
         print('Constant Development Grandma | PED Activation')
     end
     return ped
@@ -72,7 +72,7 @@ Citizen.CreateThread(function()
     local PedModel = Config.IllegalMedical.PedModel
     local Coords = Config.IllegalMedical.Coords
     CreatePedAtCoords(PedModel, Coords)
-    if Config.Framework.Debug == true then
+    if Config.Framework.Debug then
         print('Constant Development Grandma | PED Activated')
     end
     if Config.Framework.Target == 'qb-target' then
@@ -104,7 +104,7 @@ Citizen.CreateThread(function()
             },
             distance = Config.IllegalMedicalTarget.TargetDistance
         })
-        if Config.Framework.Debug == true then
+        if Config.Framework.Debug then
             print('Constant Development Grandma | Target Activated')
         end
     elseif Config.Framework.Target == 'qtarget' then
@@ -136,7 +136,7 @@ Citizen.CreateThread(function()
             },
             distance = Config.IllegalMedicalTarget.TargetDistance
         })
-        if Config.Framework.Debug == true then
+        if Config.Framework.Debug then
             print('Constant Development Grandma | Target Activated')
         end
     end
@@ -150,7 +150,7 @@ RegisterNetEvent("cr-grandma:client:MedicalAid", function()
             disableMouse = false,
             disableCombat = true,
         }, {}, {}, {}, function()
-            if Config.IllegalMedical.Minigame.Enabled == true then
+            if Config.IllegalMedical.Minigame.Enabled then
                 if Config.IllegalMedical.Minigame.PSUI then
                     exports['ps-ui']:Circle(function(success)
                         if success then
@@ -180,7 +180,7 @@ RegisterNetEvent("cr-grandma:client:MedicalAid", function()
                         ConstantDevelopmentGrandma(3, "You failed my Challenge and expect me to help you? Are you insane...", Config.IllegalMedical.OkOkNotificationTitle)
                     end
                 end
-            elseif Config.IllegalMedical.Minigame.Enabled == false then
+            elseif not Config.IllegalMedical.Minigame.Enabled then
                 TriggerServerEvent("cr-grandma:server:MedicalAid")
             end
         end, function()
@@ -198,7 +198,7 @@ RegisterNetEvent("cr-grandma:client:MedicalAidInjuries", function()
         disableMouse = false,
         disableCombat = true,
     }, {}, {}, {}, function()
-        if Config.IllegalMedical.Minigame.Enabled == true then
+        if Config.IllegalMedical.Minigame.Enabled then
             if Config.IllegalMedical.Minigame.PSUI then
                 exports['ps-ui']:Circle(function(success)
                     if success then
@@ -228,7 +228,7 @@ RegisterNetEvent("cr-grandma:client:MedicalAidInjuries", function()
                     ConstantDevelopmentGrandma(3, "You failed my Challenge and expect me to help you? Are you insane...", Config.IllegalMedical.OkOkNotificationTitle)
                 end
             end
-        elseif Config.IllegalMedical.Minigame.Enabled == false then
+        elseif not Config.IllegalMedical.Minigame.Enabled then
             TriggerServerEvent("cr-grandma:server:MedicalAidInjuries")
         end
     end, function()
