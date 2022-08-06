@@ -46,7 +46,13 @@ Config.IllegalMedical = {
     PaymentCost = 0, -- Amount of Money | If you aren't using a Money Type(cash, bank, or crypto) than you can remove this Configuration
     Item = nil, -- 'ItemName' | ItemName = QBCore Shared Item Name | If you aren't using an Item, you can remove this Configuration and the one below.
     ItemAmount = 0, -- Amount of Items
-    OkOkNotificationTitle = "Grandma Aid"
+    OkOkNotificationTitle = "Grandma Aid",
+    Minigame = {
+        Enabled = true,
+        PSUI = true,
+        QBCoreSkillBar = false,
+        QBCoreNPInspiredLock = false
+    }
 }
 
 Config.MedicalAidInjuries = {
