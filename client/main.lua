@@ -80,10 +80,10 @@ CreateThread(function()
     SpawnPeds()
     local alreadyEnteredZone = false
     local text = ' <b>[E] </b> Hug'
-    local inZone = false
     while true do
         Citizen.Wait(3)
         local ped = PlayerPedId()
+        local inZone = false
         local EntityCoords = GetEntityCoords(ped)
         local model = GetClosestHug(EntityCoords)
         local spawn = GetEntityCoords(model)
@@ -115,7 +115,7 @@ CreateThread(function()
         end
         if not inZone and alreadyEnteredZone then
             alreadyEnteredZone = false
-        exports['qb-core']:HideText()
+            exports['qb-core']:HideText()
         end
     end
 end)
