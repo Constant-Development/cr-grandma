@@ -31,6 +31,14 @@ local function ConstantDevelopmentGrandma(notifType, message, title)
     end
 end
 
+RegisterNetEvent('cr-grandma:server:hug', function(coords)
+    TriggerClientEvent("cr-grandma:client:hug", -1, coords)
+end)
+
+RegisterNetEvent('cr-grandma:server:idle', function(coords)
+    TriggerClientEvent("cr-grandma:client:idle", -1, coords)
+end)
+
 RegisterNetEvent('cr-grandma:server:MedicalAid', function(source)
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)

@@ -1,5 +1,7 @@
 local QBCore = exports['qb-core']:GetCoreObject()
 
+local spawned
+
 local function ConstantDevelopmentGrandma(notifType, message, title)
 	if Config.Framework.Notifications == 'QBCore' then
 		if notifType == 1 then
@@ -44,34 +46,81 @@ local function ConstantDevelopmentGrandma(notifType, message, title)
 	end
 end
 
-local function EnsurePedModel(pedModel)
-    RequestModel(pedModel)
-    while not HasModelLoaded(pedModel) do
-        Wait(10)
+local function SpawnPeds()
+    local PedHash = Config.IllegalMedical.PedModel
+    RequestModel(PedHash)
+    while not HasModelLoaded(PedHash) do
+        Citizen.Wait(1)
+    end
+    spawned = CreatePed(3, PedHash, Config.IllegalMedical.Coords, false, true)
+    local model = spawned
+    TaskStartScenarioInPlace(model, "WORLD_HUMAN_STAND_IMPATIENT", 0, true)
+    FreezeEntityPosition(model, true)
+    SetEntityInvincible(model, true)
+    SetBlockingOfNonTemporaryEvents(model, true)
+end
+
+local function LoadAnim(ad)
+    while not HasAnimDictLoaded(ad) do
+        RequestAnimDict(ad)
+        Citizen.Wait(1)
     end
 end
 
-local function CreatePedAtCoords(pedModel, coords)
-    if type(pedModel) == "string" then
-        pedModel = GetHashKey(pedModel)
+local function GetClosestHug(coords)
+    coords = coords
+    local ecoords = GetEntityCoords(spawned)
+    local dist = #(coords-ecoords)
+    if dist < 2 then
+        return spawned
     end
-    EnsurePedModel(pedModel)
-    local ped = CreatePed(0, pedModel, coords.x, coords.y, coords.z - 0.98, coords.w, false, false)
-    FreezeEntityPosition(ped, true)
-    SetEntityVisible(ped, true)
-    SetEntityInvincible(ped, true)
-    PlaceObjectOnGroundProperly(ped)
-    SetBlockingOfNonTemporaryEvents(ped, true)
-    if Config.Framework.Debug == true then
-        print('Constant Development Grandma | PED Activation')
-    end
-    return ped
 end
+
+CreateThread(function()
+    SpawnPeds()
+    local alreadyEnteredZone = false
+    local text = ' <b>[E] </b> Hug'
+    local inZone = false
+    while true do
+        Citizen.Wait(3)
+        local ped = PlayerPedId()
+        local EntityCoords = GetEntityCoords(ped)
+        local model = GetClosestHug(EntityCoords)
+        local spawn = GetEntityCoords(model)
+        local ehead = GetEntityHeading(model)
+        local dist = #(EntityCoords-vector3(spawn.x,spawn.y,spawn.z))
+        if dist <= 1.5 then
+            inZone = true
+            if IsControlJustReleased(0, 38) then
+                LoadAnim("mp_ped_interaction")
+                local newcoords = GetEntityForwardVector(model) * 0.4 + vector3(spawn.x, spawn.y, spawn.z-1)
+                SetEntityCoords(ped, newcoords)
+                SetEntityHeading(ped, ehead-180)
+                FreezeEntityPosition(ped, true)
+                TaskPlayAnim(ped, "mp_ped_interaction", "kisses_guy_a", 8.00, -8.00, 5000, 51, 0.00, 0, 0, 0)
+                TaskPlayAnim(model, "mp_ped_interaction", "kisses_guy_a", 8.00, -8.00, 5000, 51, 0.00, 0, 0, 0)
+                TriggerServerEvent('hud:server:RelieveStress', 100) -- Relieve Stress
+                TriggerServerEvent("cr-grandma:server:hug", spawn)
+                Citizen.Wait(5000)
+                FreezeEntityPosition(ped, false)
+                TriggerServerEvent("cr-grandma:server:idle", spawn)
+                TriggerServerEvent('cr-grandma:server:SetResourceCooldown')
+            end
+        else
+            Citizen.Wait(5000)
+        end
+        if inZone and not alreadyEnteredZone then
+            alreadyEnteredZone = true
+            exports['qb-core']:DrawText(text, 'top')
+        end
+        if not inZone and alreadyEnteredZone then
+            alreadyEnteredZone = false
+        exports['qb-core']:HideText()
+        end
+    end
+end)
 
 Citizen.CreateThread(function()
-    local PedModel = Config.IllegalMedical.PedModel
-    local Coords = Config.IllegalMedical.Coords
-    CreatePedAtCoords(PedModel, Coords)
     if Config.Framework.Debug == true then
         print('Constant Development Grandma | PED Activated')
     end
@@ -140,6 +189,16 @@ Citizen.CreateThread(function()
             print('Constant Development Grandma | Target Activated')
         end
     end
+end)
+
+RegisterNetEvent('cr-grandma:client:hug', function(coords)
+    local model = GetClosestHug(coords)
+    TaskPlayAnim(model, "mp_ped_interaction", "kisses_guy_a", 8.00, -8.00, 5000, 51, 0.00, 0, 0, 0)
+end)
+
+RegisterNetEvent('cr-grandma:client:idle', function(coords)
+    local model = GetClosestHug(coords)
+    TaskPlayAnim(model, "amb@world_human_aa_smoke@male@idle_a", "idle_c", 8.00, -8.00, -1, 51, 0.00, 0, 0, 0)
 end)
 
 RegisterNetEvent("cr-grandma:client:MedicalAid", function()
