@@ -18,7 +18,7 @@ This Resource is setup for you to have an NPC(Grandma - Configurable) that would
 
 ## Additional Credits
 
-- [tnj-development](https://github.com/tnj-development)
+### [tnj-development](https://github.com/tnj-development)
 
 * Added TNJ's Hug System | It was removed from their Repository though, we are using it within this Resource.
 
