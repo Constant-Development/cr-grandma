@@ -3,7 +3,7 @@ game 'gta5'
 
 author 'Constant Development'
 description 'QBCore Grandma Medical System'
-version '1.0.0'
+version '1.5'
 
 shared_script 'config.lua'
 client_script 'client/main.lua'
