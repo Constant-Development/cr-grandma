@@ -10,8 +10,13 @@ This Resource is setup for you to have an NPC(Grandma - Configurable) that would
 
 ## Optionals:
 
+### Optional Targets:
+
 - [qb-target](https://github.com/Renewed-Scripts/qb-target)
 - [qtarget](https://github.com/overextended/qtarget)
+
+### Optional Notifications:
+
 - [okokNotify](https://okok.tebex.io/package/4724993)
 - [mythic_notify](https://github.com/wowpanda/mythic_notify)
 - [tnj-notify](https://github.com/tnj-development/tnj-notify)
