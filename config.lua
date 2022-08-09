@@ -39,7 +39,7 @@ Config.IllegalMedicalTarget = {
 }
 
 Config.IllegalMedical = {
-    Coords = vector4(2441.8945, 4985.8208, 51.5649, 184.1566), -- Entire Vector3 Coordinate
+    Coords = vector4(2441.8945, 4985.8208, 51.5649, 184.1566), -- Entire Vector4 Coordinate
     PedModel = 'cs_mrs_thornhill', -- Ped Hash (https://docs.fivem.net/docs/game-references/ped-models/)
     PedName = "Grandma", -- Ped Name
     PaymentType = 'cash', -- 'cash' = QBCore Player Cash Money | 'bank' = QBCore Player Bank Money | 'crypto' = QBCore Player Crypto Money | 'item' = QBCore Shared Item

@@ -52,7 +52,8 @@ local function SpawnPeds()
     while not HasModelLoaded(PedHash) do
         Citizen.Wait(1)
     end
-    spawned = CreatePed(3, PedHash, Config.IllegalMedical.Coords, false, true)
+    local PedCoords = Config.IllegalMedical.Coords
+    spawned = CreatePed(3, PedHash, PedCoords.x, PedCoords.y, PedCoords.z - 1, PedCoords.w, false, true)
     local model = spawned
     TaskStartScenarioInPlace(model, "WORLD_HUMAN_STAND_IMPATIENT", 0, true)
     FreezeEntityPosition(model, true)
@@ -88,7 +89,7 @@ CreateThread(function()
         local model = GetClosestHug(EntityCoords)
         local spawn = GetEntityCoords(model)
         local ehead = GetEntityHeading(model)
-        local dist = #(EntityCoords-vector3(spawn.x,spawn.y,spawn.z))
+        local dist = #(EntityCoords-vector3(spawn.x, spawn.y, spawn.z))
         if dist <= 1.5 then
             inZone = true
             if IsControlJustReleased(0, 38) then
@@ -203,7 +204,7 @@ end)
 
 RegisterNetEvent("cr-grandma:client:MedicalAid", function()
     if QBCore.Functions.GetPlayerData().metadata.isdead or QBCore.Functions.GetPlayerData().metadata.inlaststand then
-        QBCore.Functions.Progressbar('ConstantDevelopmentIllegalGrandmaMedical', Config.IllegalMedical.PedName..'is helping you..', math.random(2500, 10000), false, true, {
+        QBCore.Functions.Progressbar('ConstantDevelopmentIllegalGrandmaMedical', Config.IllegalMedical.PedName..' is helping you..', math.random(2500, 10000), false, true, {
             disableMovement = true,
             disableCarMovement = true,
             disableMouse = false,
@@ -251,7 +252,7 @@ RegisterNetEvent("cr-grandma:client:MedicalAid", function()
 end)
 
 RegisterNetEvent("cr-grandma:client:MedicalAidInjuries", function()
-    QBCore.Functions.Progressbar('ConstantDevelopmentIllegalGrandmaMedical', Config.IllegalMedical.PedName..'is helping you..', math.random(2500, 10000), false, true, {
+    QBCore.Functions.Progressbar('ConstantDevelopmentIllegalGrandmaMedical', Config.IllegalMedical.PedName..' is helping you..', math.random(2500, 10000), false, true, {
         disableMovement = true,
         disableCarMovement = true,
         disableMouse = false,

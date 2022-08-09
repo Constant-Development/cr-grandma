@@ -39,11 +39,15 @@ RegisterNetEvent('cr-grandma:server:idle', function(coords)
     TriggerClientEvent("cr-grandma:client:idle", -1, coords)
 end)
 
-RegisterNetEvent('cr-grandma:server:MedicalAid', function(source)
+RegisterNetEvent('cr-grandma:server:MedicalAid', function()
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
+    local HasCash = Player.Functions.GetMoney("cash")
+    local HasBank = Player.Functions.GetMoney("bank")
+    local HasCrypto = Player.Functions.GetMoney("crypto")
+    local HasItem = Player.Functions.GetItemByName(Config.IllegalMedical.Item)
     if Config.IllegalMedical.PaymentType == 'cash' or 'bank' or 'crypto' then
-        if Player.Functions.GetMoney(Config.IllegalMedical.PaymentType) >= Config.IllegalMedical.PaymentCost then
+        if HasCash or HasBank or HasCrypto >= Config.IllegalMedical.PaymentCost then
             Player.Functions.RemoveMoney(Config.IllegalMedical.PaymentType, Config.IllegalMedical.PaymentCost)
             ConstantDevelopmentGrandma(1, "Wow, looks like you are certified to be helped!", Config.IllegalMedical.OkOkNotificationTitle)
             TriggerClientEvent("hospital:client:Revive", src)
@@ -56,7 +60,7 @@ RegisterNetEvent('cr-grandma:server:MedicalAid', function(source)
             ConstantDevelopmentGrandma(3, "Your really trying to get help without Money, are you Crazy!?", Config.IllegalMedical.OkOkNotificationTitle)
         end
     elseif Config.IllegalMedical.PaymentType == 'item' then
-        if Player.Functions.GetItemByName(Config.IllegalMedical.Item) then
+        if HasItem then
             Player.Functions.RemoveItem(Config.IllegalMedical.Item, Config.IllegalMedical.ItemAmount)
             ConstantDevelopmentGrandma(1, "Wow, looks like you are certified to be helped!", Config.IllegalMedical.OkOkNotificationTitle)
             TriggerClientEvent("hospital:client:Revive", src)
@@ -71,12 +75,16 @@ RegisterNetEvent('cr-grandma:server:MedicalAid', function(source)
     end
 end)
 
-RegisterNetEvent('cr-grandma:server:MedicalAidInjuries', function(source)
+RegisterNetEvent('cr-grandma:server:MedicalAidInjuries', function()
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
+    local HasCash = Player.Functions.GetMoney("cash")
+    local HasBank = Player.Functions.GetMoney("bank")
+    local HasCrypto = Player.Functions.GetMoney("crypto")
+    local HasItem = Player.Functions.GetItemByName(Config.IllegalMedical.Item)
     if Config.IllegalMedicalTarget.InjuryTarget == true then
         if Config.MedicalAidInjuries.PaymentType == 'cash' or 'bank' or 'crypto' then
-            if Player.Functions.GetMoney(Config.MedicalAidInjuries.PaymentType) >= Config.MedicalAidInjuries.PaymentCost then
+            if HasCash or HasBank or HasCrypto >= Config.MedicalAidInjuries.PaymentCost then
                 Player.Functions.RemoveMoney(Config.MedicalAidInjuries.PaymentType, Config.MedicalAidInjuries.PaymentCost)
                 ConstantDevelopmentGrandma(1, "Wow, looks like you are certified to be helped!", Config.IllegalMedical.OkOkNotificationTitle)
                 TriggerClientEvent("hospital:client:HealInjuries", src, "full")
@@ -89,7 +97,7 @@ RegisterNetEvent('cr-grandma:server:MedicalAidInjuries', function(source)
                 ConstantDevelopmentGrandma(3, "Your really trying to get help without Money, are you Crazy!?", Config.IllegalMedical.OkOkNotificationTitle)
             end
         elseif Config.MedicalAidInjuries.PaymentType == 'item' then
-            if Player.Functions.GetItemByName(Config.IllegalMedical.Item) then
+            if HasItem then
                 Player.Functions.RemoveItem(Config.MedicalAidInjuries.Item, Config.MedicalAidInjuries.ItemAmount)
                 ConstantDevelopmentGrandma(1, "Wow, looks like you are certified to be helped!", Config.IllegalMedical.OkOkNotificationTitle)
                 TriggerClientEvent("hospital:client:HealInjuries", src, "full")
