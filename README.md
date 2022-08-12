@@ -21,6 +21,12 @@ This Resource is setup for you to have an NPC(Grandma - Configurable) that would
 - [mythic_notify](https://github.com/wowpanda/mythic_notify)
 - [tnj-notify](https://github.com/tnj-development/tnj-notify)
 
+### Optional Minigame:
+
+- [ps-ui](https://github.com/Project-Sloth/ps-ui)
+- [qb-lock](https://github.com/Nathan-FiveM/qb-lock)
+- [qb-skillbar](https://github.com/qbcore-framework/qb-skillbar)
+
 ## Additional Credits
 
 ### [tnj-development](https://github.com/tnj-development)
