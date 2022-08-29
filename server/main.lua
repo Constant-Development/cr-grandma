@@ -1,7 +1,7 @@
 local QBCore = exports['qb-core']:GetCoreObject()
 
-local function ConstantDevelopmentGrandma(notifType, message, title)
-    local src = source
+local function ConstantDevelopmentGrandma(notifType, message, title, serversource)
+    local src = serversource or source
     if Config.Notifications == 'qb' or 'tnj' then
         if notifType == 1 then
             TriggerClientEvent('QBCore:Notify', src, message, 'success')
@@ -49,28 +49,28 @@ RegisterNetEvent('cr-grandma:server:MedicalAid', function()
     if Config.IllegalMedical.PaymentType == 'cash' or 'bank' or 'crypto' then
         if HasCash or HasBank or HasCrypto >= Config.IllegalMedical.PaymentCost then
             Player.Functions.RemoveMoney(Config.IllegalMedical.PaymentType, Config.IllegalMedical.PaymentCost)
-            ConstantDevelopmentGrandma(1, "Wow, looks like you are certified to be helped!", Config.IllegalMedical.OkOkNotificationTitle)
+            ConstantDevelopmentGrandma(1, "Wow, looks like you are certified to be helped!", Config.IllegalMedical.OkOkNotificationTitle, src)
             TriggerClientEvent("hospital:client:Revive", src)
             Wait(2500 * 10)
             if Config.Framework.Logs then
                 TriggerEvent('qb-log:server:CreateLog', 'constantdevelopmentgrandma', 'User Health Helped', 'green', '**Player : **'..GetPlayerName(src)..'\n**MoneyType : **'..Config.IllegalMedical.PaymentType..' **Amount : **'..Config.IllegalMedical.PaymentCost)
             end
-            ConstantDevelopmentGrandma(2, Config.IllegalMedical.PedName.." has helped you with your Health Issues...", Config.IllegalMedical.OkOkNotificationTitle)
+            ConstantDevelopmentGrandma(2, Config.IllegalMedical.PedName.." has helped you with your Health Issues...", Config.IllegalMedical.OkOkNotificationTitle, src)
         else
-            ConstantDevelopmentGrandma(3, "Your really trying to get help without Money, are you Crazy!?", Config.IllegalMedical.OkOkNotificationTitle)
+            ConstantDevelopmentGrandma(3, "Your really trying to get help without Money, are you Crazy!?", Config.IllegalMedical.OkOkNotificationTitle, src)
         end
     elseif Config.IllegalMedical.PaymentType == 'item' then
         if HasItem then
             Player.Functions.RemoveItem(Config.IllegalMedical.Item, Config.IllegalMedical.ItemAmount)
-            ConstantDevelopmentGrandma(1, "Wow, looks like you are certified to be helped!", Config.IllegalMedical.OkOkNotificationTitle)
+            ConstantDevelopmentGrandma(1, "Wow, looks like you are certified to be helped!", Config.IllegalMedical.OkOkNotificationTitle, src)
             TriggerClientEvent("hospital:client:Revive", src)
             Wait(2500 * 10)
-            ConstantDevelopmentGrandma(2, Config.IllegalMedical.PedName.." has helped you with your Health Issues...", Config.IllegalMedical.OkOkNotificationTitle)
+            ConstantDevelopmentGrandma(2, Config.IllegalMedical.PedName.." has helped you with your Health Issues...", Config.IllegalMedical.OkOkNotificationTitle, src)
             if Config.Framework.Logs then
                 TriggerEvent('qb-log:server:CreateLog', 'constantdevelopmentgrandma', 'User Health Helped', 'green', '**Player : **'..GetPlayerName(src)..'\n**MoneyType : **'..Config.IllegalMedical.PaymentType..' **Amount : **'..Config.IllegalMedical.PaymentCost)
             end
         else
-            ConstantDevelopmentGrandma(3, "It seems as if you don\'t have the essential Items!?", Config.IllegalMedical.OkOkNotificationTitle)
+            ConstantDevelopmentGrandma(3, "It seems as if you don\'t have the essential Items!?", Config.IllegalMedical.OkOkNotificationTitle, src)
         end
     end
 end)
@@ -86,31 +86,31 @@ RegisterNetEvent('cr-grandma:server:MedicalAidInjuries', function()
         if Config.MedicalAidInjuries.PaymentType == 'cash' or 'bank' or 'crypto' then
             if HasCash or HasBank or HasCrypto >= Config.MedicalAidInjuries.PaymentCost then
                 Player.Functions.RemoveMoney(Config.MedicalAidInjuries.PaymentType, Config.MedicalAidInjuries.PaymentCost)
-                ConstantDevelopmentGrandma(1, "Wow, looks like you are certified to be helped!", Config.IllegalMedical.OkOkNotificationTitle)
+                ConstantDevelopmentGrandma(1, "Wow, looks like you are certified to be helped!", Config.IllegalMedical.OkOkNotificationTitle, src)
                 TriggerClientEvent("hospital:client:HealInjuries", src, "full")
                 Wait(2500 * 10)
                 if Config.Framework.Logs then
                     TriggerEvent('qb-log:server:CreateLog', 'constantdevelopmentgrandma', 'User Injuries Helped', 'green', '**Player : **'..GetPlayerName(src)..'\n**MoneyType : **'..Config.MedicalAidInjuries.PaymentType..' **Amount : **'..Config.IllegalMedical.PaymentCost)
                 end
-                ConstantDevelopmentGrandma(2, Config.IllegalMedical.PedName.." has helped you with your Health Issues...", Config.IllegalMedical.OkOkNotificationTitle)
+                ConstantDevelopmentGrandma(2, Config.IllegalMedical.PedName.." has helped you with your Health Issues...", Config.IllegalMedical.OkOkNotificationTitle, src)
             else
-                ConstantDevelopmentGrandma(3, "Your really trying to get help without Money, are you Crazy!?", Config.IllegalMedical.OkOkNotificationTitle)
+                ConstantDevelopmentGrandma(3, "Your really trying to get help without Money, are you Crazy!?", Config.IllegalMedical.OkOkNotificationTitle, src)
             end
         elseif Config.MedicalAidInjuries.PaymentType == 'item' then
             if HasItem then
                 Player.Functions.RemoveItem(Config.MedicalAidInjuries.Item, Config.MedicalAidInjuries.ItemAmount)
-                ConstantDevelopmentGrandma(1, "Wow, looks like you are certified to be helped!", Config.IllegalMedical.OkOkNotificationTitle)
+                ConstantDevelopmentGrandma(1, "Wow, looks like you are certified to be helped!", Config.IllegalMedical.OkOkNotificationTitle, src)
                 TriggerClientEvent("hospital:client:HealInjuries", src, "full")
                 Wait(2500 * 10)
                 if Config.Framework.Logs then
                     TriggerEvent('qb-log:server:CreateLog', 'constantdevelopmentgrandma', 'User Injuries Helped', 'green', '**Player : **'..GetPlayerName(src)..'\n**MoneyType : **'..Config.MedicalAidInjuries.PaymentType..' **Amount : **'..Config.IllegalMedical.PaymentCost)
                 end
-                ConstantDevelopmentGrandma(2, Config.IllegalMedical.PedName.." has helped you with your Health Issues...", Config.IllegalMedical.OkOkNotificationTitle)
+                ConstantDevelopmentGrandma(2, Config.IllegalMedical.PedName.." has helped you with your Health Issues...", Config.IllegalMedical.OkOkNotificationTitle, src)
             else
-                ConstantDevelopmentGrandma(3, "It seems as if you don\'t have the essential Items!?", Config.IllegalMedical.OkOkNotificationTitle)
+                ConstantDevelopmentGrandma(3, "It seems as if you don\'t have the essential Items!?", Config.IllegalMedical.OkOkNotificationTitle, src)
             end
         end
     else
-        ConstantDevelopmentGrandma(2, "Uhhh, well I currently can\'t help with your Medical Injuries at this time...", Config.IllegalMedical.OkOkNotificationTitle)
+        ConstantDevelopmentGrandma(2, "Uhhh, well I currently can\'t help with your Medical Injuries at this time...", Config.IllegalMedical.OkOkNotificationTitle, src)
     end
 end)
