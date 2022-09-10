@@ -1,5 +1,7 @@
 # cr-grandma
 
+[Resource Preview](https://www.youtube.com/watch?v=NfV0mwMih3g)
+
 ## Simple NPC Medical System for FiveM
 
 [Constant Development Discord](https://discord.gg/gSQbshCNv4)
