@@ -112,11 +112,19 @@ CreateThread(function()
         end
         if inZone and not alreadyEnteredZone then
             alreadyEnteredZone = true
-            exports['qb-core']:DrawText(text, 'top')
+            if Config.Framework.DrawText == 'qb-core' then
+                exports['qb-core']:DrawText(text, 'top')
+            elseif Config.Framework.DrawText == 'okok' then
+                exports['okokTextUI']:Open(text, 'lightgrey', 'left')
+            end
         end
         if not inZone and alreadyEnteredZone then
             alreadyEnteredZone = false
-            exports['qb-core']:HideText()
+            if Config.Framework.DrawText == 'qb-core' then
+                exports['qb-core']:HideText()
+            elseif Config.Framework.DrawText == 'okok' then
+                exports['okokTextUI']:Close()
+            end
         end
     end
 end)
