@@ -29,8 +29,8 @@ This Resource is setup for you to have an NPC(Grandma - Configurable) that would
 
 ### Optional DrawText:
 
-- [QBCore-DrawText]()
-- [okokTextUI]()
+- [QBCore-DrawText](https://github.com/qbcore-framework/qb-core)
+- [okokTextUI](https://okok.tebex.io/package/4725001)
 
 ## Additional Credits
 
