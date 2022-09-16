@@ -143,6 +143,14 @@ Citizen.CreateThread(function()
         }, {
             options = {
                 {
+                    num = 1,
+                    type = "client",
+                    event = "cr-grandma:client:MedicalAidInjuries",
+                    icon = Config.IllegalMedicalTarget.InjuryTargetIcon,
+                    label = Config.IllegalMedicalTarget.InjuryTargetLabel,
+                },
+                {
+                    num = 2,
                     type = "client",
                     event = "cr-grandma:client:MedicalAid",
                     icon = Config.IllegalMedicalTarget.TargetIcon,
@@ -152,13 +160,7 @@ Citizen.CreateThread(function()
                             if QBCore.Functions.GetPlayerData().metadata.isdead or QBCore.Functions.GetPlayerData().metadata.inlaststand then return true else return false end
                         end
                     end,
-                },
-                {
-                    type = "client",
-                    event = "cr-grandma:client:MedicalAidInjuries",
-                    icon = Config.IllegalMedicalTarget.InjuryTargetIcon,
-                    label = Config.IllegalMedicalTarget.InjuryTargetLabel,
-                },
+                }
             },
             distance = Config.IllegalMedicalTarget.TargetDistance
         })
@@ -175,6 +177,14 @@ Citizen.CreateThread(function()
         }, {
             options = {
                 {
+                    num = 1,
+                    type = "client",
+                    event = "cr-grandma:client:MedicalAidInjuries",
+                    icon = Config.IllegalMedicalTarget.InjuryTargetIcon,
+                    label = Config.IllegalMedicalTarget.InjuryTargetLabel,
+                },
+                {
+                    num = 2,
                     type = "client",
                     event = "cr-grandma:client:MedicalAid",
                     icon = Config.IllegalMedicalTarget.TargetIcon,
@@ -184,13 +194,7 @@ Citizen.CreateThread(function()
                             if QBCore.Functions.GetPlayerData().metadata.isdead or QBCore.Functions.GetPlayerData().metadata.inlaststand then return true else return false end
                         end
                     end,
-                },
-                {
-                    type = "client",
-                    event = "cr-grandma:client:MedicalAidInjuries",
-                    icon = Config.IllegalMedicalTarget.InjuryTargetIcon,
-                    label = Config.IllegalMedicalTarget.InjuryTargetLabel,
-                },
+                }
             },
             distance = Config.IllegalMedicalTarget.TargetDistance
         })
