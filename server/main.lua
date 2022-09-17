@@ -2,7 +2,7 @@ local QBCore = exports['qb-core']:GetCoreObject()
 
 local function ConstantDevelopmentGrandma(notifType, message, title, serversource)
     local src = serversource or source
-    if Config.Notifications == 'qb' or 'tnj' then
+    if Config.Notifications == 'qb' then
         if notifType == 1 then
             TriggerClientEvent('QBCore:Notify', src, message, 'success')
         elseif notifType == 2 then
@@ -31,30 +31,30 @@ local function ConstantDevelopmentGrandma(notifType, message, title, serversourc
     end
 end
 
-local function MedicalAid()
-    local src = source
+local function MedicalAid(serversource)
+    local src = serversource or source
     local Player = QBCore.Functions.GetPlayer(src)
     Player.Functions.RemoveMoney(Config.IllegalMedical.PaymentType, Config.IllegalMedical.PaymentCost)
-    ConstantDevelopmentGrandma(1, "Wow, looks like you are certified to be helped!", Config.IllegalMedical.OkOkNotificationTitle)
+    ConstantDevelopmentGrandma(1, "Wow, looks like you are certified to be helped!", Config.IllegalMedical.OkOkNotificationTitle, src)
     TriggerClientEvent("hospital:client:Revive", src)
     Wait(2500 * 10)
     if Config.Framework.Logs then
         TriggerEvent('qb-log:server:CreateLog', 'constantdevelopmentgrandma', 'User Health Helped', 'green', '**Player : **'..GetPlayerName(src)..'\n**MoneyType : **'..Config.IllegalMedical.PaymentType..' **Amount : **'..Config.IllegalMedical.PaymentCost)
     end
-    ConstantDevelopmentGrandma(2, Config.IllegalMedical.PedName.." has helped you with your Health Issues...", Config.IllegalMedical.OkOkNotificationTitle)
+    ConstantDevelopmentGrandma(2, Config.IllegalMedical.PedName.." has helped you with your Health Issues...", Config.IllegalMedical.OkOkNotificationTitle, src)
 end
 
-local function MedicalAidInjuries()
-    local src = source
+local function MedicalAidInjuries(serversource)
+    local src = serversource or source
     local Player = QBCore.Functions.GetPlayer(src)
     Player.Functions.RemoveMoney(Config.MedicalAidInjuries.PaymentType, Config.MedicalAidInjuries.PaymentCost)
-    ConstantDevelopmentGrandma(1, "Wow, looks like you are certified to be helped!", Config.IllegalMedical.OkOkNotificationTitle)
+    ConstantDevelopmentGrandma(1, "Wow, looks like you are certified to be helped!", Config.IllegalMedical.OkOkNotificationTitle, src)
     TriggerClientEvent("hospital:client:HealInjuries", src, "full")
     Wait(2500 * 10)
     if Config.Framework.Logs then
         TriggerEvent('qb-log:server:CreateLog', 'constantdevelopmentgrandma', 'User Injuries Helped', 'green', '**Player : **'..GetPlayerName(src)..'\n**MoneyType : **'..Config.MedicalAidInjuries.PaymentType..' **Amount : **'..Config.IllegalMedical.PaymentCost)
     end
-    ConstantDevelopmentGrandma(2, Config.IllegalMedical.PedName.." has helped you with your Health Issues...", Config.IllegalMedical.OkOkNotificationTitle)
+    ConstantDevelopmentGrandma(2, Config.IllegalMedical.PedName.." has helped you with your Health Issues...", Config.IllegalMedical.OkOkNotificationTitle, src)
 end
 
 RegisterNetEvent('cr-grandma:server:hug', function(coords)
@@ -74,11 +74,11 @@ RegisterNetEvent('cr-grandma:server:MedicalAid', function()
     local HasItem = Player.Functions.GetItemByName(Config.IllegalMedical.Item)
     if Config.IllegalMedical.PaymentType == 'cash' or Config.IllegalMedical.PaymentType == 'bank' or Config.IllegalMedical.PaymentType == 'crypto' then
         if Config.IllegalMedical.PaymentType == 'cash' and HasCash >= Config.IllegalMedical.PaymentCost then
-            MedicalAid()
+            MedicalAid(src)
         elseif Config.IllegalMedical.PaymentType == 'bank' and HasBank >= Config.IllegalMedical.PaymentCost then
-            MedicalAid()
+            MedicalAid(src)
         elseif Config.IllegalMedical.PaymentType == 'crypto' and HasCrypto >= Config.IllegalMedical.PaymentCost then
-            MedicalAid()
+            MedicalAid(src)
         else
             ConstantDevelopmentGrandma(3, "Your really trying to get help without Money, are you Crazy!?", Config.IllegalMedical.OkOkNotificationTitle, src)
         end
@@ -109,11 +109,11 @@ RegisterNetEvent('cr-grandma:server:MedicalAidInjuries', function()
     if Config.IllegalMedicalTarget.InjuryTarget == true then
         if Config.MedicalAidInjuries.PaymentType == 'cash' or Config.MedicalAidInjuries.PaymentType == 'bank' or Config.MedicalAidInjuries.PaymentType == 'crypto' then
             if Config.MedicalAidInjuries.PaymentType == 'cash' and HasCash >= Config.MedicalAidInjuries.PaymentCost then
-                MedicalAidInjuries()
+                MedicalAidInjuries(src)
             elseif Config.MedicalAidInjuries.PaymentType == 'bank' and HasBank >= Config.MedicalAidInjuries.PaymentCost then
-                MedicalAidInjuries()
+                MedicalAidInjuries(src)
             elseif Config.MedicalAidInjuries.PaymentType == 'crypto' and HasCrypto >= Config.MedicalAidInjuries.PaymentCost then
-                MedicalAidInjuries()
+                MedicalAidInjuries(src)
             else
                 ConstantDevelopmentGrandma(3, "Your really trying to get help without Money, are you Crazy!?", Config.IllegalMedical.OkOkNotificationTitle, src)
             end
