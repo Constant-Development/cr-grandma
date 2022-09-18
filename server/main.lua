@@ -2,7 +2,7 @@ local QBCore = exports['qb-core']:GetCoreObject()
 
 local function ConstantDevelopmentGrandma(notifType, message, title, serversource)
     local src = serversource or source
-    if Config.Notifications == 'qb' then
+    if Config.Framework.Notifications == 'qb' or 'tnj' then
         if notifType == 1 then
             TriggerClientEvent('QBCore:Notify', src, message, 'success')
         elseif notifType == 2 then
@@ -10,7 +10,7 @@ local function ConstantDevelopmentGrandma(notifType, message, title, serversourc
         elseif notifType == 3 then
             TriggerClientEvent('QBCore:Notify', src, message, 'error')
         end
-    elseif Config.Notifications == 'okok' then
+    elseif Config.Framework.Notifications == 'okok' then
         if notifType == 1 then
             TriggerClientEvent('okokNotify:Alert', src, title, message, 5000, 'success')
         elseif notifType == 2 then
@@ -18,7 +18,7 @@ local function ConstantDevelopmentGrandma(notifType, message, title, serversourc
         elseif notifType == 3 then
             TriggerClientEvent('okokNotify:Alert', src, title, message, 5000, 'error')
         end
-    elseif Config.Notifications == 'mythic' then
+    elseif Config.Framework.Notifications == 'mythic' then
         if notifType == 1 then
             TriggerClientEvent('mythic_notify:client:SendAlert:custom', src, { type = 'success', text = message, length = 5000})
         elseif notifType == 2 then
@@ -26,7 +26,7 @@ local function ConstantDevelopmentGrandma(notifType, message, title, serversourc
         elseif notifType == 3 then
             TriggerClientEvent('mythic_notify:client:SendAlert:custom', src, { type = 'error', text = message, length = 5000})
         end
-    elseif Config.Notifications == 'chat' then
+    elseif Config.Framework.Notifications == 'chat' then
         TriggerClientEvent('chatMessage', src, message)
     end
 end
