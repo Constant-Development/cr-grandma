@@ -145,13 +145,17 @@ Citizen.CreateThread(function()
                 },
                 {
                     num = 2,
-                    type = "client",
-                    event = "cr-grandma:client:MedicalAid",
                     icon = Config.IllegalMedicalTarget.TargetIcon,
                     label = Config.IllegalMedicalTarget.TargetLabel,
                     canInteract = function()
-                        if not Config.IllegalMedicalTarget.CanInteractLimit then return true else
-                            if QBCore.Functions.GetPlayerData().metadata.isdead or QBCore.Functions.GetPlayerData().metadata.inlaststand then return true else return false end
+                        if Config.IllegalMedicalTarget.CanInteractLimit then
+                            if QBCore.Functions.GetPlayerData().metadata.isdead or QBCore.Functions.GetPlayerData().metadata.inlaststand then 
+                                TriggerClientEvent('cr-grandma:client:MedicalAid')
+                            else
+                                ConstantDevelopmentGrandma(3, "You aren\'t Dead...", Config.IllegalMedical.OkOkNotificationTitle)
+                            end
+                        elseif not Config.IllegalMedicalTarget.CanInteractLimit then
+                            TriggerClientEvent('cr-grandma:client:MedicalAid')
                         end
                     end,
                 }
@@ -179,13 +183,17 @@ Citizen.CreateThread(function()
                 },
                 {
                     num = 2,
-                    type = "client",
-                    event = "cr-grandma:client:MedicalAid",
                     icon = Config.IllegalMedicalTarget.TargetIcon,
                     label = Config.IllegalMedicalTarget.TargetLabel,
                     canInteract = function()
-                        if not Config.IllegalMedicalTarget.CanInteractLimit then return true else
-                            if QBCore.Functions.GetPlayerData().metadata.isdead or QBCore.Functions.GetPlayerData().metadata.inlaststand then return true else return false end
+                        if Config.IllegalMedicalTarget.CanInteractLimit then
+                            if QBCore.Functions.GetPlayerData().metadata.isdead or QBCore.Functions.GetPlayerData().metadata.inlaststand then
+                                TriggerClientEvent('cr-grandma:client:MedicalAid')
+                            else
+                                ConstantDevelopmentGrandma(3, "You aren\'t Dead...", Config.IllegalMedical.OkOkNotificationTitle)
+                            end
+                        elseif not Config.IllegalMedicalTarget.CanInteractLimit then
+                            TriggerClientEvent('cr-grandma:client:MedicalAid')
                         end
                     end,
                 }
