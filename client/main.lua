@@ -149,13 +149,13 @@ Citizen.CreateThread(function()
                     label = Config.IllegalMedicalTarget.TargetLabel,
                     canInteract = function()
                         if Config.IllegalMedicalTarget.CanInteractLimit then
-                            if QBCore.Functions.GetPlayerData().metadata.isdead or QBCore.Functions.GetPlayerData().metadata.inlaststand then 
-                                TriggerClientEvent('cr-grandma:client:MedicalAid')
+                            if QBCore.Functions.GetPlayerData().metadata.isdead or QBCore.Functions.GetPlayerData().metadata.inlaststand then
+                                TriggerEvent('cr-grandma:client:MedicalAid')
                             else
                                 ConstantDevelopmentGrandma(3, "You aren\'t Dead...", Config.IllegalMedical.OkOkNotificationTitle)
                             end
                         elseif not Config.IllegalMedicalTarget.CanInteractLimit then
-                            TriggerClientEvent('cr-grandma:client:MedicalAid')
+                            TriggerEvent('cr-grandma:client:MedicalAid')
                         end
                     end,
                 }
@@ -188,12 +188,12 @@ Citizen.CreateThread(function()
                     canInteract = function()
                         if Config.IllegalMedicalTarget.CanInteractLimit then
                             if QBCore.Functions.GetPlayerData().metadata.isdead or QBCore.Functions.GetPlayerData().metadata.inlaststand then
-                                TriggerClientEvent('cr-grandma:client:MedicalAid')
+                                TriggerEvent('cr-grandma:client:MedicalAid')
                             else
                                 ConstantDevelopmentGrandma(3, "You aren\'t Dead...", Config.IllegalMedical.OkOkNotificationTitle)
                             end
                         elseif not Config.IllegalMedicalTarget.CanInteractLimit then
-                            TriggerClientEvent('cr-grandma:client:MedicalAid')
+                            TriggerEvent('cr-grandma:client:MedicalAid')
                         end
                     end,
                 }
