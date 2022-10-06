@@ -106,17 +106,17 @@ CreateThread(function()
         end
         if inZone and not alreadyEnteredZone then
             alreadyEnteredZone = true
-            if Config.Framework.DrawText == 'qb-core' then
-                exports['qb-core']:DrawText(text, 'top')
-            elseif Config.Framework.DrawText == 'okok' then
-                exports['okokTextUI']:Open(text, 'lightgrey', 'left')
+            if Config.Framework.DrawText.Type == 'qb-core' then
+                exports['qb-core']:DrawText(text, Config.Framework.DrawText.Position)
+            elseif Config.Framework.DrawText.Type == 'okok' then
+                exports['okokTextUI']:Open(text, 'lightgrey', Config.Framework.DrawText.Position)
             end
         end
         if not inZone and alreadyEnteredZone then
             alreadyEnteredZone = false
-            if Config.Framework.DrawText == 'qb-core' then
+            if Config.Framework.DrawText.Type == 'qb-core' then
                 exports['qb-core']:HideText()
-            elseif Config.Framework.DrawText == 'okok' then
+            elseif Config.Framework.DrawText.Type == 'okok' then
                 exports['okokTextUI']:Close()
             end
         end
@@ -217,52 +217,48 @@ RegisterNetEvent('cr-grandma:client:idle', function(coords)
 end)
 
 RegisterNetEvent("cr-grandma:client:MedicalAid", function()
-    if QBCore.Functions.GetPlayerData().metadata.isdead or QBCore.Functions.GetPlayerData().metadata.inlaststand then
-        QBCore.Functions.Progressbar('ConstantDevelopmentIllegalGrandmaMedical', Config.IllegalMedical.PedName..' is helping you..', math.random(2500, 10000), false, true, {
-            disableMovement = true,
-            disableCarMovement = true,
-            disableMouse = false,
-            disableCombat = true,
-        }, {}, {}, {}, function()
-            if Config.IllegalMedical.Minigame.Enabled == true then
-                if Config.IllegalMedical.Minigame.PSUI then
-                    exports['ps-ui']:Circle(function(success)
-                        if success then
-                            TriggerServerEvent("cr-grandma:server:MedicalAid")
-                        else
-                            ConstantDevelopmentGrandma(3, "You failed my Challenge and expect me to help you? Are you insane...", Config.IllegalMedical.OkOkNotificationTitle)
-                        end
-                    end, math.random(5, 10), math.random(3, 6))
-                elseif Config.IllegalMedical.Minigame.QBCoreSkillBar then
-                    local Skillbar = exports['qb-skillbar']:GetSkillbarObject()
-                    Skillbar.Start({
-                        duration = math.random(1000, 3000),
-                        pos = math.random(10, 30),
-                        width = math.random(10, 20),
-                    }, function()
-                        TriggerServerEvent("cr-grandma:server:MedicalAid")
-                    end, function()
-                        ConstantDevelopmentGrandma(3, "You failed my Challenge and expect me to help you? Are you insane...", Config.IllegalMedical.OkOkNotificationTitle)
-                    end)
-                elseif Config.IllegalMedical.Minigame.QBCoreNPInspiredLock then
-                    local seconds = math.random(3, 6)
-                    local circles = math.random(5, 10)
-                    local success = exports['qb-lock']:StartLockPickCircle(circles, seconds)
+    QBCore.Functions.Progressbar('ConstantDevelopmentIllegalGrandmaMedical', Config.IllegalMedical.PedName..' is helping you..', math.random(2500, 10000), false, true, {
+        disableMovement = true,
+        disableCarMovement = true,
+        disableMouse = false,
+        disableCombat = true,
+    }, {}, {}, {}, function()
+        if Config.IllegalMedical.Minigame.Enabled == true then
+            if Config.IllegalMedical.Minigame.PSUI then
+                exports['ps-ui']:Circle(function(success)
                     if success then
-                        TriggerServerEvent("cr-grandma:server:MedicalAid")
+                    TriggerServerEvent("cr-grandma:server:MedicalAid")
                     else
                         ConstantDevelopmentGrandma(3, "You failed my Challenge and expect me to help you? Are you insane...", Config.IllegalMedical.OkOkNotificationTitle)
                     end
+                end, math.random(5, 10), math.random(3, 6))
+            elseif Config.IllegalMedical.Minigame.QBCoreSkillBar then
+                local Skillbar = exports['qb-skillbar']:GetSkillbarObject()
+                Skillbar.Start({
+                    duration = math.random(1000, 3000),
+                    pos = math.random(10, 30),
+                    width = math.random(10, 20),
+                }, function()
+                    TriggerServerEvent("cr-grandma:server:MedicalAid")
+                end, function()
+                    ConstantDevelopmentGrandma(3, "You failed my Challenge and expect me to help you? Are you insane...", Config.IllegalMedical.OkOkNotificationTitle)
+                end)
+            elseif Config.IllegalMedical.Minigame.QBCoreNPInspiredLock then
+                local seconds = math.random(3, 6)
+                local circles = math.random(5, 10)
+                local success = exports['qb-lock']:StartLockPickCircle(circles, seconds)
+                if success then
+                    TriggerServerEvent("cr-grandma:server:MedicalAid")
+                else
+                    ConstantDevelopmentGrandma(3, "You failed my Challenge and expect me to help you? Are you insane...", Config.IllegalMedical.OkOkNotificationTitle)
                 end
-            elseif Config.IllegalMedical.Minigame.Enabled == false then
-                TriggerServerEvent("cr-grandma:server:MedicalAid")
             end
-        end, function()
-            ConstantDevelopmentGrandma(3, "You wouldn\'t sit still so I stopped helping you...", Config.IllegalMedical.OkOkNotificationTitle)
-        end)
-    else
-        ConstantDevelopmentGrandma(3, "It seems like you don\'t need any help?", Config.IllegalMedical.OkOkNotificationTitle)
-    end
+        elseif Config.IllegalMedical.Minigame.Enabled == false then
+            TriggerServerEvent("cr-grandma:server:MedicalAid")
+        end
+    end, function()
+        ConstantDevelopmentGrandma(3, "You wouldn\'t sit still so I stopped helping you...", Config.IllegalMedical.OkOkNotificationTitle)
+    end)
 end)
 
 RegisterNetEvent("cr-grandma:client:MedicalAidInjuries", function()

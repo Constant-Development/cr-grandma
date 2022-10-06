@@ -9,9 +9,10 @@ Config.Framework = {
     -- 'okok' = okokNotify
     -- 'mythic' = mythic_notify
     -- 'chat' = Chat Message
-    DrawText = 'qb-core',
-    -- 'qb-core' = QBCore DrawText
-    -- 'okok' = okokTextUI
+    DrawText = {
+        Type = 'qb-core', -- 'qb-core' or 'okok'
+        Position = 'top', -- 'top' or 'left' or 'right'
+    },
     Logs = false, -- Currrently setup via QBCore Logs
     -- True = Logs Enabled
     -- False = Logs Disabled
