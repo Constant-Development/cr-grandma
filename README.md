@@ -50,3 +50,6 @@ This Resource is setup for you to have an NPC(Grandma - Configurable) that would
 ```
     ['constantdevelopmentgrandma'] = 'YOUR_WEBHOOK_HERE',
 ```
+
+
+https://www.dmca.com/r/m15qp1y
