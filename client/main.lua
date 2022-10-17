@@ -145,17 +145,19 @@ Citizen.CreateThread(function()
                 },
                 {
                     num = 2,
+                    type = "client",
+                    event = 'cr-grandma:client:MedicalAid',
                     icon = Config.IllegalMedicalTarget.TargetIcon,
                     label = Config.IllegalMedicalTarget.TargetLabel,
                     canInteract = function()
                         if Config.IllegalMedicalTarget.CanInteractLimit then
                             if QBCore.Functions.GetPlayerData().metadata.isdead or QBCore.Functions.GetPlayerData().metadata.inlaststand then
-                                TriggerEvent('cr-grandma:client:MedicalAid')
+                                return true
                             else
-                                ConstantDevelopmentGrandma(3, "You aren\'t Dead...", Config.IllegalMedical.OkOkNotificationTitle)
+                                return false
                             end
                         elseif not Config.IllegalMedicalTarget.CanInteractLimit then
-                            TriggerEvent('cr-grandma:client:MedicalAid')
+                            return true
                         end
                     end,
                 }
@@ -183,17 +185,19 @@ Citizen.CreateThread(function()
                 },
                 {
                     num = 2,
+                    type = "client",
+                    event = 'cr-grandma:client:MedicalAid',
                     icon = Config.IllegalMedicalTarget.TargetIcon,
                     label = Config.IllegalMedicalTarget.TargetLabel,
                     canInteract = function()
                         if Config.IllegalMedicalTarget.CanInteractLimit then
                             if QBCore.Functions.GetPlayerData().metadata.isdead or QBCore.Functions.GetPlayerData().metadata.inlaststand then
-                                TriggerEvent('cr-grandma:client:MedicalAid')
+                                return true
                             else
-                                ConstantDevelopmentGrandma(3, "You aren\'t Dead...", Config.IllegalMedical.OkOkNotificationTitle)
+                                return false
                             end
                         elseif not Config.IllegalMedicalTarget.CanInteractLimit then
-                            TriggerEvent('cr-grandma:client:MedicalAid')
+                            return true
                         end
                     end,
                 }
