@@ -32,11 +32,11 @@ Config.IllegalMedicalTarget = {
     TargetDistance = 1.5, -- Distance in which you can Target the Medical Aid
     TargetLabel = "Speak with Grandma about your Health Issues", -- Target Label Description | Text you see for the Target Label
     TargetIcon = "fa-solid fa-skull", -- Another Example: fa-solid fa-skull | Icon you see when Targeting the Medical Aid
-    CanInteractLimit = false, -- Limits the Player to Interact with the Target if their Dead or 'InLastStand'
+    CanInteractLimit = true, -- Limits the Player to Interact with the Target if they're Dead or 'InLastStand' (Revives the player)
 
     -- This Configuration plays a toll with the Injury Healing.
     -- If you set 'InjuryTarget' to false than you won't have to edit the 'InjuryTargetLabel' and 'InjuryTargetIcon'
-    InjuryTarget = true,
+    InjuryTarget = true, -- Heals player's status effects (broken limbs, burnt, etc.. DOES NOT HEAL)
     InjuryTargetLabel = "Speak with Grandma about your Medical Injuries",
     InjuryTargetIcon = "fas fa-user-injured",
 }

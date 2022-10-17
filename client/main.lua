@@ -142,6 +142,9 @@ Citizen.CreateThread(function()
                     event = "cr-grandma:client:MedicalAidInjuries",
                     icon = Config.IllegalMedicalTarget.InjuryTargetIcon,
                     label = Config.IllegalMedicalTarget.InjuryTargetLabel,
+                    canInteract = function()
+                        if Config.IllegalMedicalTarget.InjuryTarget then return true else return false end
+                    end
                 },
                 {
                     num = 2,
